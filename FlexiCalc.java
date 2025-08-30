@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+/**
+ * Enhanced Console-Based Calculator
+ * Features: Basic arithmetic, scientific functions, unit conversions
+ * Author: FlexiCalc Team
+ */
 public class FlexiCalc {
     private static Scanner scanner = new Scanner(System.in);
     
@@ -45,13 +50,16 @@ public class FlexiCalc {
                 
             } catch (Exception e) {
                 System.out.println("ERROR: An unexpected error occurred: " + e.getMessage());
-                scanner.nextLine();
+                scanner.nextLine(); // Clear the buffer
             }
         }
         
         scanner.close();
     }
     
+    /**
+     * Display the main menu options
+     */
     private static void displayMainMenu() {
         System.out.println("\n+---------------------------------------+");
         System.out.println("|              MAIN MENU                |");
@@ -64,6 +72,9 @@ public class FlexiCalc {
         System.out.println("+---------------------------------------+");
     }
     
+    /**
+     * Handle basic arithmetic operations
+     */
     private static void performBasicArithmetic() {
         System.out.println("\nBASIC ARITHMETIC OPERATIONS");
         System.out.println("Available operations: +, -, *, /, %, ^ (power)");
@@ -86,6 +97,9 @@ public class FlexiCalc {
         }
     }
     
+    /**
+     * Perform basic arithmetic calculation
+     */
     private static double calculateBasicOperation(double num1, String operator, double num2) 
             throws ArithmeticException, IllegalArgumentException {
         
@@ -113,11 +127,12 @@ public class FlexiCalc {
         }
     }
     
+    /**
+     * Handle scientific calculations
+     */
     private static void performScientificCalculations() {
         System.out.println("\nSCIENTIFIC CALCULATIONS");
-        System.out.println("1. Trigonometric Functions (sin, cos, tan)");
-        System.out.println("2. Logarithmic Functions (log, ln)");
-        System.out.println("3. Other Functions (sqrt, factorial, abs)");
+        displayScientificMenu();
         
         try {
             int choice = getIntInput("Enter your choice: ");
@@ -140,6 +155,18 @@ public class FlexiCalc {
         }
     }
     
+    /**
+     * Display scientific calculation menu
+     */
+    private static void displayScientificMenu() {
+        System.out.println("1. Trigonometric Functions (sin, cos, tan)");
+        System.out.println("2. Logarithmic Functions (log, ln)");
+        System.out.println("3. Other Functions (sqrt, factorial, abs)");
+    }
+    
+    /**
+     * Handle trigonometric functions
+     */
     private static void performTrigonometricFunctions() {
         System.out.println("\nTrigonometric Functions");
         
@@ -158,6 +185,9 @@ public class FlexiCalc {
         CalculationHistory.addToHistory(result);
     }
     
+    /**
+     * Handle logarithmic functions
+     */
     private static void performLogarithmicFunctions() {
         System.out.println("\nLogarithmic Functions");
         
@@ -179,6 +209,9 @@ public class FlexiCalc {
         CalculationHistory.addToHistory(result);
     }
     
+    /**
+     * Handle other mathematical functions
+     */
     private static void performOtherMathFunctions() {
         System.out.println("\nOther Mathematical Functions");
         System.out.println("1. Square Root");
@@ -225,17 +258,20 @@ public class FlexiCalc {
         }
     }
     
+    /**
+     * Calculate factorial recursively
+     */
     private static long calculateFactorial(int n) {
         if (n <= 1) return 1;
         return n * calculateFactorial(n - 1);
     }
     
+    /**
+     * Handle unit conversions
+     */
     private static void performUnitConversions() {
         System.out.println("\nUNIT CONVERSIONS");
-        System.out.println("1. Temperature (Celsius, Fahrenheit, Kelvin)");
-        System.out.println("2. Length (Meters, Feet, Inches)");
-        System.out.println("3. Weight (Kilograms, Pounds, Ounces)");
-        System.out.println("4. Currency (USD, EUR, INR)");
+        displayConversionMenu();
         
         try {
             int choice = getIntInput("Enter your choice: ");
@@ -261,6 +297,19 @@ public class FlexiCalc {
         }
     }
     
+    /**
+     * Display conversion menu
+     */
+    private static void displayConversionMenu() {
+        System.out.println("1. Temperature (Celsius, Fahrenheit, Kelvin)");
+        System.out.println("2. Length (Meters, Feet, Inches)");
+        System.out.println("3. Weight (Kilograms, Pounds, Ounces)");
+        System.out.println("4. Currency (USD, EUR, INR)");
+    }
+    
+    /**
+     * Handle temperature conversions
+     */
     private static void performTemperatureConversion() {
         System.out.println("\nTemperature Conversion");
         System.out.println("1. Celsius to Fahrenheit");
@@ -276,19 +325,19 @@ public class FlexiCalc {
         switch (choice) {
             case 1:
                 result = (temperature * 9/5) + 32;
-                conversionText = String.format("%.2fC = %.2fF", temperature, result);
+                conversionText = String.format("%.2f°C = %.2f°F", temperature, result);
                 break;
             case 2:
                 result = (temperature - 32) * 5/9;
-                conversionText = String.format("%.2fF = %.2fC", temperature, result);
+                conversionText = String.format("%.2f°F = %.2f°C", temperature, result);
                 break;
             case 3:
                 result = temperature + 273.15;
-                conversionText = String.format("%.2fC = %.2fK", temperature, result);
+                conversionText = String.format("%.2f°C = %.2fK", temperature, result);
                 break;
             case 4:
                 result = temperature - 273.15;
-                conversionText = String.format("%.2fK = %.2fC", temperature, result);
+                conversionText = String.format("%.2fK = %.2f°C", temperature, result);
                 break;
             default:
                 System.out.println("Invalid choice!");
@@ -299,6 +348,9 @@ public class FlexiCalc {
         CalculationHistory.addToHistory(conversionText);
     }
     
+    /**
+     * Handle length conversions
+     */
     private static void performLengthConversion() {
         System.out.println("\nLength Conversion");
         System.out.println("1. Meters to Feet");
@@ -337,6 +389,9 @@ public class FlexiCalc {
         CalculationHistory.addToHistory(conversionText);
     }
     
+    /**
+     * Handle weight conversions
+     */
     private static void performWeightConversion() {
         System.out.println("\nWeight Conversion");
         System.out.println("1. Kilograms to Pounds");
@@ -375,6 +430,9 @@ public class FlexiCalc {
         CalculationHistory.addToHistory(conversionText);
     }
     
+    /**
+     * Handle currency conversions (with fixed rates for demo)
+     */
     private static void performCurrencyConversion() {
         System.out.println("\nCurrency Conversion (Demo rates)");
         System.out.println("1. USD to EUR");
@@ -387,21 +445,22 @@ public class FlexiCalc {
         double result = 0;
         String conversionText = "";
         
+        // Demo exchange rates (in real application, fetch from API)
         switch (choice) {
             case 1:
-                result = amount * 0.85;
+                result = amount * 0.85; // USD to EUR
                 conversionText = String.format("$%.2f = €%.2f", amount, result);
                 break;
             case 2:
-                result = amount * 1.18;
+                result = amount * 1.18; // EUR to USD
                 conversionText = String.format("€%.2f = $%.2f", amount, result);
                 break;
             case 3:
-                result = amount * 82.5;
+                result = amount * 82.5; // USD to INR
                 conversionText = String.format("$%.2f = Rs%.2f", amount, result);
                 break;
             case 4:
-                result = amount / 82.5;
+                result = amount / 82.5; // INR to USD
                 conversionText = String.format("Rs%.2f = $%.2f", amount, result);
                 break;
             default:
@@ -414,39 +473,53 @@ public class FlexiCalc {
         CalculationHistory.addToHistory(conversionText);
     }
     
+    /**
+     * Display calculation history
+     */
     private static void displayHistory() {
         System.out.println("\nCALCULATION HISTORY");
         CalculationHistory.displayHistory();
     }
     
+    // Input validation methods
+    
+    /**
+     * Get validated integer input
+     */
     private static int getIntInput(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
                 int value = scanner.nextInt();
-                scanner.nextLine();
+                scanner.nextLine(); // Consume newline
                 return value;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid integer!");
-                scanner.nextLine();
+                scanner.nextLine(); // Clear invalid input
             }
         }
     }
     
+    /**
+     * Get validated double input
+     */
     private static double getDoubleInput(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
                 double value = scanner.nextDouble();
-                scanner.nextLine();
+                scanner.nextLine(); // Consume newline
                 return value;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number!");
-                scanner.nextLine();
+                scanner.nextLine(); // Clear invalid input
             }
         }
     }
     
+    /**
+     * Get string input
+     */
     private static String getStringInput(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();
